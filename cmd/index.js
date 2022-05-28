@@ -4,7 +4,6 @@ const { Client, Intents, Collection } = require('discord.js');
 const Sequelize = require('sequelize');
 const config = require("../config.js");
 const fs = require("fs");
-const { exit } = require('process');
 require('dotenv').config();
 
 // Create a new client instance
@@ -34,8 +33,6 @@ for (const file of events) {
 const commands = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
 for (const file of commands) {
   const commandName = file.split(".")[0];
-  // if(commandName == "pummel")
-  //   continue;
 
   const command = require(`../commands/${file}`);
 
