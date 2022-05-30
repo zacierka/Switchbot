@@ -3,3 +3,4 @@ exports.run = (client, message, args) => {
 }
 
 exports.name = "ping";
+exports.alias = [];

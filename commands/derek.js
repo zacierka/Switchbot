@@ -37,3 +37,4 @@ exports.run = (client, message, args) => {
 }
 
 exports.name = "derek";
+exports.alias = [];

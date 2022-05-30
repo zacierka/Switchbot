@@ -15,3 +15,4 @@ exports.run = (client, message, args) => {
   };
   
   exports.name = "reload";
+  exports.alias = [];
