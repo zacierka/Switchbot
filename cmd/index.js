@@ -2,6 +2,7 @@
 
 const { Client, Intents, Collection } = require('discord.js');
 const Sequelize = require('sequelize');
+
 const config = require("../config.js");
 const fs = require("fs");
 require('dotenv').config();
@@ -37,7 +38,15 @@ for (const file of commands) {
   const command = require(`../commands/${file}`);
 
   console.log(`Attempting to load command ${commandName}`);
+
   client.commands.set(commandName, command);
+
+  if(command.alias.length > 0) {
+    command.alias.forEach(function (alias, index) {
+      console.log(`Attempting to load alias ${alias} command ${commandName}`);
+      client.commands.set(alias, command);
+    });
+  }
 }
 
 client.login(process.env.token);

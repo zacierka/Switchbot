@@ -45,3 +45,4 @@ exports.run = (client, message, args) => {
 }
 
 exports.name = "pummel";
+exports.alias = [];
