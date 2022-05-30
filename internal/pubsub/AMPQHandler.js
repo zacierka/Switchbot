@@ -8,7 +8,6 @@ module.exports = class MQ {
         this.q = q;
     }
     async setupConnection() {
-        console.log(this.uri);
         this.conn = await amqp.connect('amqp://localhost');
         this.channel = await this.conn.createChannel();
 
