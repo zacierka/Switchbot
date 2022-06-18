@@ -1,9 +1,11 @@
 const MQ = require("../internal/pubsub/AMPQHandler");
-
-//figure out the import here for send to queue
 const msgq = new MQ(process.env.MC_QUEUE);
+const { checkCooldown } = require('../internal/utilities/cooldown');
 
 exports.run = (client, message, args) => {
+    if(checkCooldown(message.author.id, message)) {
+        return;
+    }
     msgq.setupConnection()
     .then(() => {
         msgq.send('ONLINE_MCREQUEST');

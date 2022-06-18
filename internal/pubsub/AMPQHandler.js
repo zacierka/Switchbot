@@ -8,7 +8,7 @@ module.exports = class MQ {
         this.q = q;
     }
     async setupConnection() {
-        this.conn = await amqp.connect('amqp://localhost');
+        this.conn = await amqp.connect(this.uri);
         this.channel = await this.conn.createChannel();
 
         await this.channel.assertQueue(this.q, { durable: false });

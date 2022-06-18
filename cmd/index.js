@@ -7,6 +7,7 @@ const config = require("../config.js");
 const fs = require("fs");
 require('dotenv').config();
 
+// console.log = function() {} // DISABLES LOGGING TO CONSOLE FOR PROD
 // Create a new client instance
 const client = new Client({ intents: [
     Intents.FLAGS.GUILDS,
