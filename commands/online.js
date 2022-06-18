@@ -27,6 +27,12 @@ exports.run = (client, message, args) => {
                     .then(() => {
                         msgq.send('ONLINE_MCREQUEST');
                     });
+                }  else if(results[0]['status'] == "CLOSED") {
+                    embed.setDescription("The Server is CLOSED. Server will be back up when 1.19 releases.");
+                    embed.setColor('#8b15c2');
+                    message.channel.send({
+                        embeds: [embed]
+                    });
                 }
             }).catch(err => console.log(err));
 }
