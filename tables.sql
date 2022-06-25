@@ -11,9 +11,20 @@ CREATE TABLE `minecraft`.`status` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- -----------------------------------------
+-- create minecraft.player_sessions table
+-- -----------------------------------------
+CREATE TABLE `player_sessions` (
+  `uuid` varchar(60) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `joined` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- -----------------------------------------
 -- auto-generated discord Members table
 -- -----------------------------------------
 
 -- -----------------------------------------
 -- auto-generated discord PummelScores table
 -- -----------------------------------------
+

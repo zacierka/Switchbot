@@ -57,3 +57,50 @@ ON DUPLICATE KEY UPDATE
 
 END$$
 DELIMITER ;
+
+-- ---------------------------------------------
+-- `minecraft`.`CreatePlayerSession` procedure
+-- ---------------------------------------------
+DELIMITER $$
+CREATE DEFINER=`bot`@`%` PROCEDURE `CreatePlayerSession`(
+  IN UUID_IN varchar(60),
+  IN playername_IN varchar(45)
+)
+BEGIN
+
+  INSERT INTO `minecraft`.`player_sessions`(`uuid`, `name`)
+  VALUES (UUID_IN, playername_IN)
+  ON duplicate key update
+    `joined` = current_timestamp()
+  ;
+  
+END$$
+DELIMITER ;
+
+
+-- ---------------------------------------------
+-- `minecraft`.`ClosePlayerSession` procedure
+-- ---------------------------------------------
+DELIMITER $$
+CREATE DEFINER=`bot`@`%` PROCEDURE `ClosePlayerSession`(
+  IN UUID_IN varchar(60)
+)
+BEGIN
+
+  DELETE FROM `minecraft`.`player_sessions`
+  WHERE UUID_IN = `minecraft`.`player_sessions`.`uuid`;
+  
+END$$
+DELIMITER ;
+
+-- ---------------------------------------------
+-- `minecraft`.`GetPlayersSessionTime` procedure
+-- ---------------------------------------------
+DELIMITER $$
+CREATE DEFINER=`bot`@`%` PROCEDURE `GetPlayersSessionTime`()
+BEGIN
+
+  SELECT `name`, timestampdiff(MINUTE, `joined`, CURRENT_TIMESTAMP) as `time` FROM minecraft.player_sessions;
+
+END$$
+DELIMITER ;
